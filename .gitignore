@@ -9,3 +9,5 @@ dist/
 
 # Log files
 npm-debug.log*
+
+.env

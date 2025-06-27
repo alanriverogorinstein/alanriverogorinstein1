@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import "../styles/global.css";
 import imageUrlBuilder from '@sanity/image-url';
 
+// Sanity config
 const projectId = 'tvtqrltk';
 const dataset = 'production';
 
@@ -13,6 +14,7 @@ function urlForImage(source: any): string {
   return builder.image(source).width(600).url();
 }
 
+// Fetch projects from Sanity
 const query = `*[_type == "project"] | order(title asc){
   _id,
   title,
@@ -28,6 +30,18 @@ const { result: projects } = await res.json();
 
 const corporateProjects = projects.filter((p: any) => p.category === "corporate");
 const personalProjects = projects.filter((p: any) => p.category === "personal");
+
+// Fetch Dribbble shots
+const token = import.meta.env.DRIBBBLE_TOKEN;
+
+const dribbbleRes = await fetch("https://api.dribbble.com/v2/user/shots", {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+});
+
+const dribbbleShots = await dribbbleRes.json();
+
 ---
 
 <head>
@@ -57,15 +71,15 @@ const personalProjects = projects.filter((p: any) => p.category === "personal");
     ))}
   </div>
 
-  <h2 class="text-2xl font-semibold mb-4">Playground Projects</h2>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    {personalProjects.map((project: any) => (
-       <div class="p-4 border shadow" key={project._id}>
-        <h3 class="text-lg font-bold">{project.title}</h3>
-        <p class="text-sm">{project.description}</p>
+  <h2 class="text-2xl font-semibold mb-4">Visual design playground</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {dribbbleShots.map((shot: any) => (
+        <a href={shot.html_url} class="block p-0" target="_blank" key={shot.id}>
+        <img src={shot.images.normal} alt={shot.title} class="w-full h-80 object-cover mb-2" />
+        <h3 class="text-lg font-bold">{shot.title}</h3>
+        </a>
+        ))}
       </div>
-    ))}
-  </div>
 </main>
 
 <Footer />
