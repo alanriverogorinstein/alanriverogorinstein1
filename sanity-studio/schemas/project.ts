@@ -38,5 +38,13 @@ export const project = defineType({
       name: 'publishedAt',
       type: 'datetime'
     }),
+    defineField({
+      name: 'body',
+      title: 'Case Study Body',
+      type: 'array',
+      of: [ 
+          { type: 'block' }, // regular text
+          { type: 'image',options: { hotspot: true }, },],
+    })
   ]
 })
