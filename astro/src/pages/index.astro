@@ -1,0 +1,71 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import "../styles/global.css";
+import imageUrlBuilder from '@sanity/image-url';
+
+const projectId = 'tvtqrltk';
+const dataset = 'production';
+
+const builder = imageUrlBuilder({ projectId, dataset });
+
+function urlForImage(source: any): string {
+  return builder.image(source).width(600).url();
+}
+
+const query = `*[_type == "project"] | order(title asc){
+  _id,
+  title,
+  description,
+  category,
+  image,
+  slug
+}`;
+
+const url = `https://${projectId}.api.sanity.io/v2021-10-21/data/query/${dataset}?query=${encodeURIComponent(query)}`;
+const res = await fetch(url);
+const { result: projects } = await res.json();
+
+const corporateProjects = projects.filter((p: any) => p.category === "corporate");
+const personalProjects = projects.filter((p: any) => p.category === "personal");
+---
+
+<head>
+  <link rel="stylesheet" href="https://use.typekit.net/jmr0xtj.css" />
+</head>
+
+<Navbar />
+
+<main class="px-6 py-12 max-w-screen-2xl mx-auto">
+  <h2 class="text-2xl font-semibold mb-4">Ancestry</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+    {corporateProjects.map((project: any) => (
+      <a href={`/project/${project.slug.current}`} class="block hover:opacity-90 transition">
+        <div class="p-0 h-[500px] flex flex-col">
+          {project.image && (
+            <img
+              src={urlForImage(project.image)}
+              alt={project.title}
+              class="w-full h-90 object-cover mb-3"
+            />
+          )}
+          <h3 class="text-xl">{project.title}</h3>
+          <p class="text-sm">{project.description}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-semibold mb-4">Playground Projects</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {personalProjects.map((project: any) => (
+       <div class="p-4 border shadow" key={project._id}>
+        <h3 class="text-lg font-bold">{project.title}</h3>
+        <p class="text-sm">{project.description}</p>
+      </div>
+    ))}
+  </div>
+</main>
+
+<Footer />

@@ -1,0 +1,67 @@
+---
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import imageUrlBuilder from '@sanity/image-url';
+import "../../styles/global.css";
+
+// Astro's dynamic routing hook
+export async function getStaticPaths() {
+  const projectId = 'tvtqrltk';
+  const dataset = 'production';
+  const query = `*[_type == "project"]{ slug }`;
+  const url = `https://${projectId}.api.sanity.io/v2021-10-21/data/query/${dataset}?query=${encodeURIComponent(query)}`;
+  const res = await fetch(url);
+  const { result } = await res.json();
+
+  return result.map(project => ({
+    params: { slug: project.slug.current }
+  }));
+}
+
+// Get slug from URL
+const { slug } = Astro.params;
+
+// Now fetch the single project by slug
+const projectId = 'tvtqrltk';
+const dataset = 'production';
+
+const builder = imageUrlBuilder({ projectId, dataset });
+function urlForImage(source) {
+  return builder.image(source).width(1000).url();
+}
+
+const query = `*[_type == "project" && slug.current == "${slug}"][0]{
+  _id,
+  title,
+  description,
+  category,
+  image,
+  publishedAt
+}`;
+const url = `https://${projectId}.api.sanity.io/v2021-10-21/data/query/${dataset}?query=${encodeURIComponent(query)}`;
+const res = await fetch(url);
+const { result: project } = await res.json();
+
+if (!project) {
+  throw new Error(`Project not found: ${slug}`);
+}
+---
+
+<Navbar />
+
+<main class="px-6 py-12 max-w-3xl mx-auto">
+  <h1 class="text-4xl font-bold mb-4">{project.title}</h1>
+
+  {project.image && (
+    <img
+      src={urlForImage(project.image)}
+      alt={project.title}
+      class="w-full h-auto rounded-xl mb-6"
+    />
+  )}
+
+  <p class="text-gray-600 text-sm mb-2">{project.category}</p>
+  <p class="text-lg leading-relaxed">{project.description}</p>
+</main>
+
+<Footer />
