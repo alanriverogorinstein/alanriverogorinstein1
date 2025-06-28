@@ -1,8 +1,7 @@
 ---
-import Navbar from '../../components/Navbar.astro';
-import Footer from '../../components/Footer.astro';
+// Imports
+import SiteShell from '@/layouts/SiteShell.astro';
 import imageUrlBuilder from '@sanity/image-url';
-import "../../styles/global.css";
 
 // Astro's dynamic routing hook
 export async function getStaticPaths() {
@@ -39,6 +38,7 @@ const query = `*[_type == "project" && slug.current == "${slug}"][0]{
   publishedAt,
   body
 }`;
+
 const url = `https://${projectId}.api.sanity.io/v2021-10-21/data/query/${dataset}?query=${encodeURIComponent(query)}`;
 const res = await fetch(url);
 const { result: project } = await res.json();
@@ -47,11 +47,10 @@ if (!project) {
   throw new Error(`Project not found: ${slug}`);
 }
 ---
-<html>
-  <head>
-    <title>{project.title}</title>
-  </head>
-  <body class="px-6 py-12 max-w-3xl mx-auto">
+<SiteShell>
+  <Fragment slot="title">{project.title}</Fragment>
+
+  <div class="px-6 py-12 max-w-3xl mx-auto">
     <a href="/" class="text-sm text-gray-500 hover:underline">← Back</a>
     <h1 class="text-3xl font-bold mb-4">{project.title}</h1>
     <p class="text-lg text-gray-700 mb-6">{project.description}</p>
@@ -66,18 +65,16 @@ if (!project) {
 
     {project.body && (
       <div class="prose prose-lg max-w-3xl mx-auto">
-      {project.body.map((block: any) => {
-      if (block._type === 'block') {
-        return <p>{block.children?.[0]?.text}</p>
-      }
-      if (block._type === 'image') {
-        return <img src={urlForImage(block).url()} alt="" class="my-8 rounded-lg" />
-      }
-      return null;
-    })}
+        {project.body.map((block: any) => {
+          if (block._type === 'block') {
+            return <p>{block.children?.[0]?.text}</p>;
+          }
+          if (block._type === 'image') {
+            return <img src={urlForImage(block).url()} alt="" class="my-8 rounded-lg" />;
+          }
+          return null;
+        })}
+      </div>
+    )}
   </div>
-)}
-  </body>
-</html>
-
-
+</SiteShell>

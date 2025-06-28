@@ -8,8 +8,13 @@ dotenv.config();
 
 // https://astro.build/config
 export default defineConfig({
-  vite: {
+ vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        '@': new URL('./src', import.meta.url).pathname,
+      },
+    },
   },
 
   integrations: [
@@ -20,3 +25,4 @@ export default defineConfig({
     }),
   ],
 });
+
