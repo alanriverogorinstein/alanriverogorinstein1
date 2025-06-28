@@ -1,4 +1,6 @@
-// @ts-check
+// Main Astro configuration file
+
+// @ts-check for VS Code
 import { defineConfig } from 'astro/config';
 import tailwindcss from "@tailwindcss/vite";
 import sanity from "@sanity/astro";
@@ -25,4 +27,3 @@ export default defineConfig({
     }),
   ],
 });
-

@@ -1,47 +1,53 @@
-# Astro Starter Kit: Minimal
+# Alan Rivero Gorinstein – Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+A fully custom-coded, modern editorial-style portfolio showcasing UX case studies, built with Astro, Tailwind CSS, and Sanity.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Tech Stack
 
-## 🚀 Project Structure
+- **Astro** – Static site generator for fast, component-based development
+- **Tailwind CSS (v4)** – Utility-first CSS framework for styling
+- **Sanity CMS** – Headless content backend for dynamic project data
+- **Typekit / Adobe Fonts** – Custom typography system
 
-Inside of your Astro project, you'll see the following folders and files:
+---
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Getting Started
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Clone the repo:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash
+git clone https://github.com/alanriverogorinstein/alanriverogorinstein1.git
+cd alanriverogorinstein1
+npm install
+npm run dev
 
-Any static assets, like images, can be placed in the `public/` directory.
+---
 
-## 🧞 Commands
+## Project structure
 
-All commands are run from the root of the project, from a terminal:
+alanriverogorinstein1/
+├── astro/
+│   ├── src/
+│   │   ├── components/     → Navbar, Footer, and other UI elements
+│   │   ├── layouts/        → SiteShell layout wrapper
+│   │   ├── pages/          → index.astro, about.astro, project/[slug].astro
+│   │   └── styles/         → global.css (custom + Tailwind styles)
+│   ├── public/             → Static assets
+│   └── astro.config.mjs    → Astro + Vite configuration
+├── studio/                 → Sanity CMS studio project
+├── .vscode/                → Recommended editor settings
+├── .gitignore              → Git exclusions
+├── package.json            → Project dependencies
+└── README.md               → This file
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+---
 
-## 👀 Want to learn more?
+## Features
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Dynamic project pages powered by Sanity and Astro’s file-based routing
+Custom SiteShell layout with global font and navigation
+Tailwind utility styling with custom serif + sans font stack
+Clean responsive design across breakpoints
+Tags for safe fallback and versioning
