@@ -73,14 +73,16 @@ const dribbbleShots = await dribbbleRes.json();
   </div>
 
   <h2 class="text-2xl font-semibold mb-4">Visual design playground</h2>
+    {Array.isArray(dribbbleShots) && (
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {dribbbleShots.map((shot: any) => (
-        <a href={shot.html_url} class="block p-0" target="_blank" key={shot.id}>
-        <img src={shot.images.normal} alt={shot.title} class="w-full h-80 object-cover mb-2" />
-        <h3 class="text-lg font-bold">{shot.title}</h3>
-        </a>
+          <a href={shot.html_url} class="block p-0" target="_blank" key={shot.id}>
+            <img src={shot.images.normal} alt={shot.title} class="w-full h-80 object-cover mb-2" />
+            <h3 class="text-lg font-bold">{shot.title}</h3>
+          </a>
         ))}
       </div>
+    )}
 </main>
 
 <Footer />
