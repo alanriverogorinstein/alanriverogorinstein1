@@ -40,7 +40,9 @@ const dribbbleRes = await fetch("https://api.dribbble.com/v2/user/shots", {
   }
 });
 
-const dribbbleShots = await dribbbleRes.json();
+
+//const dribbbleShots = await dribbbleRes.json();
+const dribbbleShots = Array.isArray(fetchedDribbbleData) ? fetchedDribbbleData : [];
 
 ---
 
@@ -73,7 +75,7 @@ const dribbbleShots = await dribbbleRes.json();
   </div>
 
   <h2 class="text-2xl font-semibold mb-4">Visual design playground</h2>
-    {Array.isArray(dribbbleShots) && (
+    {Array.isArray(dribbbleShots) && dribbbleShots.length > 0 && (
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {dribbbleShots.map((shot: any) => (
           <a href={shot.html_url} class="block p-0" target="_blank" key={shot.id}>
