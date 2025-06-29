@@ -32,8 +32,6 @@ const corporateProjects = projects.filter((p: any) => p.category === "corporate"
 const personalProjects = projects.filter((p: any) => p.category === "personal");
 
 // All code for Dribbble fetch
-const token = import.meta.env.DRIBBBLE_TOKEN;
-
 const dribbbleRes = await fetch("https://api.dribbble.com/v2/user/shots", {
   headers: {
     Authorization: `Bearer ${token}`
@@ -41,10 +39,7 @@ const dribbbleRes = await fetch("https://api.dribbble.com/v2/user/shots", {
 });
 
 const dribbbleData = await dribbbleRes.json();
-const dribbbleData = await dribbbleRes.json();
 const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
-
-//console.log("🧪 dribbbleData:", dribbbleData);
 
 ---
 
