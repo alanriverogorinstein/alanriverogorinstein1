@@ -41,7 +41,10 @@ const dribbbleRes = await fetch("https://api.dribbble.com/v2/user/shots", {
 });
 
 const dribbbleData = await dribbbleRes.json();
+const dribbbleData = await dribbbleRes.json();
 const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
+
+//console.log("🧪 dribbbleData:", dribbbleData);
 
 ---
 
