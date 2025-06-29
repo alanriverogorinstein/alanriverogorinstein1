@@ -1,3 +1,7 @@
-import { project } from './project'
+import project from './project'
+import videoEmbed from './objects/videoEmbed'
 
-export const schemaTypes = [project]
+export const schemaTypes = [
+  project,
+  videoEmbed,
+]

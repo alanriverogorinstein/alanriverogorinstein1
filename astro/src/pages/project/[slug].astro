@@ -29,13 +29,17 @@ function urlForImage(source) {
   return builder.image(source).width(1000).url();
 }
 
+// GROQ query
 const query = `*[_type == "project" && slug.current == "${slug}"][0]{
   _id,
   title,
-  description,
-  category,
+  whatIDid,
+  impact,
+  platform,
+  role,
+  yearShipped,
+  teamSetup,
   image,
-  publishedAt,
   body
 }`;
 
@@ -52,16 +56,58 @@ if (!project) {
 
   <div class="px-6 py-12 max-w-3xl mx-auto">
     <a href="/" class="text-sm text-gray-500 hover:underline">← Back</a>
-    <h1 class="text-3xl font-bold mb-4">{project.title}</h1>
-    <p class="text-lg text-gray-700 mb-6">{project.description}</p>
 
-    {project.image && (
-      <img
-        src={urlForImage(project.image)}
-        alt={project.title}
-        class="mb-8 rounded-lg w-full object-cover max-h-[400px]"
-      />
-    )}
+    <h1 class="text-3xl font-bold mb-4">{project.title}</h1>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-8">
+      <!-- What I Did -->
+      <div>
+        <dt class="font-semibold text-sm text-gray-500 mb-1">What I did</dt>
+        <dd class="text-base text-gray-800">
+          {project.whatIDid}
+        </dd>
+      </div>
+
+      <!-- The Impact -->
+      <div>
+        <dt class="font-semibold text-sm text-gray-500 mb-1">The impact</dt>
+        <dd class="text-base text-gray-800">
+          <ul class="list-disc list-inside space-y-1">
+            {project.impact?.map((item: string) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </dd>
+      </div>
+    </div>
+
+    <!-- Metadata section -->
+    <dl class="text-sm text-gray-600 space-y-1 mb-8">
+      {project.platform && (
+        <div>
+          <dt class="font-semibold inline">Platform:</dt>
+          <dd class="inline ml-1">{project.platform}</dd>
+        </div>
+      )}
+      {project.role && (
+        <div>
+          <dt class="font-semibold inline">Role:</dt>
+          <dd class="inline ml-1">{project.role}</dd>
+        </div>
+      )}
+      {project.yearShipped && (
+        <div>
+          <dt class="font-semibold inline">Year Shipped:</dt>
+          <dd class="inline ml-1">{project.yearShipped}</dd>
+        </div>
+      )}
+      {project.teamSetup && (
+        <div>
+          <dt class="font-semibold inline">Team Setup:</dt>
+          <dd class="inline ml-1">{project.teamSetup}</dd>
+        </div>
+      )}
+    </dl>
 
     {project.body && (
       <div class="prose prose-lg max-w-3xl mx-auto">
@@ -70,8 +116,24 @@ if (!project) {
             return <p>{block.children?.[0]?.text}</p>;
           }
           if (block._type === 'image') {
-            return <img src={urlForImage(block).url()} alt="" class="my-8 rounded-lg" />;
+            return <img src={urlForImage(block)} alt="" class="my-8 rounded-lg" />;
           }
+          if (block._type === 'videoEmbed') {
+            const driveEmbedUrl = block.url.replace('/view?usp=sharing', '/preview')
+
+            return (
+              <div class="aspect-video my-8">
+                <iframe
+                  src={driveEmbedUrl}
+                  title="Embedded video"
+                  class="w-full h-full rounded-lg"
+                  frameborder="0"
+                  allowfullscreen
+                />
+              </div>
+            )
+          }
+
           return null;
         })}
       </div>
