@@ -54,11 +54,9 @@ if (!project) {
 <SiteShell>
   <Fragment slot="title">{project.title}</Fragment>
 
+  <!-- Narrow top section -->
   <div class="px-6 py-12 max-w-3xl mx-auto">
-    <a href="/" class="text-sm text-gray-500 hover:underline">← Back</a>
-
     <h1 class="text-3xl font-bold mb-4">{project.title}</h1>
-
     <div class="grid md:grid-cols-2 gap-8 mb-8">
       <!-- What I Did -->
       <div>
@@ -67,7 +65,6 @@ if (!project) {
           {project.whatIDid}
         </dd>
       </div>
-
       <!-- The Impact -->
       <div>
         <dt class="font-semibold text-sm text-gray-500 mb-1">The impact</dt>
@@ -108,35 +105,42 @@ if (!project) {
         </div>
       )}
     </dl>
-
-    {project.body && (
-      <div class="prose prose-lg max-w-3xl mx-auto">
-        {project.body.map((block: any) => {
-          if (block._type === 'block') {
-            return <p>{block.children?.[0]?.text}</p>;
-          }
-          if (block._type === 'image') {
-            return <img src={urlForImage(block)} alt="" class="my-8 rounded-lg" />;
-          }
-          if (block._type === 'videoEmbed') {
-            const driveEmbedUrl = block.url.replace('/view?usp=sharing', '/preview')
-
-            return (
-              <div class="aspect-video my-8">
-                <iframe
-                  src={driveEmbedUrl}
-                  title="Embedded video"
-                  class="w-full h-full rounded-lg"
-                  frameborder="0"
-                  allowfullscreen
-                />
-              </div>
-            )
-          }
-
-          return null;
-        })}
-      </div>
-    )}
   </div>
+
+  <!-- Wide case study body -->
+  {project.body && (
+    <div class="w-full">
+      <div class="max-w-screen-xl px-4 md:px-8 mx-auto">
+        <div class="prose prose-lg max-w-none">
+          {project.body.map((block: any) => {
+            if (block._type === 'block') {
+              return <p>{block.children?.[0]?.text}</p>;
+            }
+            if (block._type === 'image') {
+              return <img
+                        src={urlForImage(block)}
+                        alt=""
+                        class="my-8 w-full max-w-none"
+                      />;
+            }
+            if (block._type === 'videoEmbed') {
+              const driveEmbedUrl = block.url.replace('/view?usp=sharing', '/preview');
+              return (
+                <div class="aspect-video my-8">
+                  <iframe
+                    src={driveEmbedUrl}
+                    title="Embedded video"
+                    class="w-full h-full rounded-lg"
+                    frameborder="0"
+                    allowfullscreen
+                  />
+                </div>
+              );
+            }
+            return null;
+          })}
+        </div>
+      </div>
+    </div>
+  )}
 </SiteShell>

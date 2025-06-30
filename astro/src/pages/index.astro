@@ -53,7 +53,7 @@ const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
 <Navbar />
 
 <main class="px-6 py-12 max-w-screen-2xl mx-auto">
-  <h2 class="text-2xl font-semibold mb-4">Corporate case studies</h2>
+  <h2 class="text-2xl font-semibold mb-4">Real world case studies</h2>
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
     {corporateProjects.map((project: any) => (
@@ -73,7 +73,7 @@ const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
     ))}
   </div>
 
-  <h2 class="text-2xl font-semibold mb-4">Visual design playground</h2>
+  <h2 class="text-2xl font-semibold mb-4">Dribbble and concepts</h2>
     {Array.isArray(dribbbleShots) && dribbbleShots.length > 0 && (
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {dribbbleShots.map((shot: any) => (
