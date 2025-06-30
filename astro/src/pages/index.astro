@@ -32,6 +32,8 @@ const corporateProjects = projects.filter((p: any) => p.category === "corporate"
 const personalProjects = projects.filter((p: any) => p.category === "personal");
 
 // All code for Dribbble fetch
+const token = import.meta.env.DRIBBBLE_TOKEN as string;
+
 const dribbbleRes = await fetch("https://api.dribbble.com/v2/user/shots", {
   headers: {
     Authorization: `Bearer ${token}`
