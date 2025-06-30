@@ -1,11 +1,6 @@
 {
   "redirects": [
     {
-      "source": "https://alanriverogorinstein.com",
-      "destination": "https://www.alanriverogorinstein.com",
-      "permanent": true
-    },
-    {
       "source": "/",
       "has": [
         {
@@ -14,7 +9,7 @@
         }
       ],
       "destination": "https://www.alanriverogorinstein.com",
-      "statusCode": 301
+      "permanent": true
     }
   ]
 }
