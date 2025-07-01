@@ -17,6 +17,15 @@ h2, h3 {
   font-variation-settings: "opsz" 12, "wght" 300;
 }
 
-p {
+.prose p,
+.content p {
   color: #4D4D4D;
+}
+
+.btn {
+  @apply inline-block px-6 py-3 rounded-full text-sm font-semibold;
+}
+
+.btn-primary {
+  @apply bg-black text-white hover:opacity-90 transition;
 }
