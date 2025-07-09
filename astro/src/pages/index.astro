@@ -1,4 +1,5 @@
 ---
+import SiteShell from '@/layouts/SiteShell.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import "../styles/global.css";
@@ -44,47 +45,40 @@ const dribbbleData = await dribbbleRes.json();
 const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
 
 ---
+<SiteShell title="Alan Rivero Gorinstein • Senior UX Designer">
+  <main class="px-6 py-12 max-w-screen-2xl mx-auto">
+    <h2 class="type-heading-2 mb-4">Shipped products</h2>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="https://use.typekit.net/jmr0xtj.css" />
-</head>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      {corporateProjects.map((project: any) => (
+        <a href={`/project/${project.slug.current}`} class="block hover:opacity-90 transition">
+          <div class="p-0 h-[500px] flex flex-col">
+            {project.image && (
+              <img
+                src={urlForImage(project.image)}
+                alt={project.title}
+                class="w-full h-90 object-cover mb-3"
+              />
+            )}
+            <h3 class="type-heading-3 mb-1">{project.title}</h3>
+            <p class="type-muted">{project.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
 
-<Navbar />
+    <h2 class="type-heading-2 mb-4">Concepts and one-offs</h2>
 
-<main class="px-6 py-12 max-w-screen-2xl mx-auto">
-  <h2 class="text-2xl font-semibold mb-4">Real world case studies</h2>
-
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-    {corporateProjects.map((project: any) => (
-      <a href={`/project/${project.slug.current}`} class="block hover:opacity-90 transition">
-        <div class="p-0 h-[500px] flex flex-col">
-          {project.image && (
-            <img
-              src={urlForImage(project.image)}
-              alt={project.title}
-              class="w-full h-90 object-cover mb-3"
-            />
-          )}
-          <h3 class="text-xl">{project.title}</h3>
-          <p class="text-sm">{project.description}</p>
-        </div>
-      </a>
-    ))}
-  </div>
-
-  <h2 class="text-2xl font-semibold mb-4">Dribbble and concepts</h2>
     {Array.isArray(dribbbleShots) && dribbbleShots.length > 0 && (
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {dribbbleShots.map((shot: any) => (
-          <a href={shot.html_url} class="block p-0" target="_blank" key={shot.id}>
+          <a href={shot.html_url} class="block p-0 hover:opacity-90 transition" target="_blank" key={shot.id}>
             <img src={shot.images.normal} alt={shot.title} class="w-full h-80 object-cover mb-2" />
-            <h3 class="text-lg font-bold">{shot.title}</h3>
+            <h3 class="type-heading-3">{shot.title}</h3>
           </a>
         ))}
       </div>
     )}
-</main>
-
-<!-- Force rebuild for correct deployment -->
-<Footer />
+  </main>
+  <Footer />
+</SiteShell>

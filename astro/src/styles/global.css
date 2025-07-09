@@ -40,7 +40,8 @@
   --text-heading: #333;
   --text-body: #4d4d4d;
   --text-muted: #666666;
-  --text-accent: #000000; /* Figure out brand tone */
+  --text-accent: #05472a; /* Evergreen */
+  --text-accent-muted: color-mix(in srgb, var(--text-accent) 70%, white);
   --text-inverse: #fff; /* For dark backgrounds */
 }
 
@@ -239,12 +240,11 @@
     color: var(--text-body);
   }
 
-  /* Signature branding */
   .brand {
     font-family: var(--font-serif);
     font-weight: var(--font-weight-kis-light);
     font-variation-settings: "opsz" var(--font-opsz-kis-small), "wght" var(--font-weight-kis-light);
-    color: var(--text-heading);
+    color: var(--text-accent);
   }
 
   /* Muted text for captions, timestamps, etc. */
@@ -252,5 +252,15 @@
     font-family: var(--font-sans);
     font-size: var(--font-size-sm);
     color: var(--text-muted);
+  }
+
+  .type-accent {
+  color: var(--text-accent);
+  }
+
+  .btn-primary {
+    background-color: var(--text-accent);
+    color: var(--text-inverse);
+    @apply px-6 py-3 rounded-full text-sm font-semibold transition hover:opacity-90;
   }
 }

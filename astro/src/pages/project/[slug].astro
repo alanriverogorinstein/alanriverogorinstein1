@@ -51,24 +51,25 @@ if (!project) {
   throw new Error(`Project not found: ${slug}`);
 }
 ---
-<SiteShell>
-  <Fragment slot="title">{project.title}</Fragment>
-
+<SiteShell title={`Alan Rivero Gorinstein • ${project.title}`}>
   <!-- Narrow top section -->
   <div class="px-6 py-12 max-w-3xl mx-auto">
-    <h1 class="text-3xl font-bold mb-4">{project.title}</h1>
+    <!-- Title -->
+    <h1 class="type-heading-1 mb-4">{project.title}</h1>
+
+    <!-- What I Did / The Impact -->
     <div class="grid md:grid-cols-2 gap-8 mb-8">
       <!-- What I Did -->
       <div>
-        <dt class="font-semibold text-sm text-gray-500 mb-1">What I did</dt>
-        <dd class="text-base text-gray-800">
+        <dt class="type-muted mb-1">What I did</dt>
+        <dd class="type-body">
           {project.whatIDid}
         </dd>
       </div>
       <!-- The Impact -->
       <div>
-        <dt class="font-semibold text-sm text-gray-500 mb-1">The impact</dt>
-        <dd class="text-base text-gray-800">
+        <dt class="type-muted mb-1">The impact</dt>
+        <dd class="type-body">
           <ul class="list-disc list-inside space-y-1">
             {project.impact?.map((item: string) => (
               <li>{item}</li>
@@ -79,28 +80,28 @@ if (!project) {
     </div>
 
     <!-- Metadata section -->
-    <dl class="text-sm text-gray-600 space-y-1 mb-8">
+    <dl class="type-muted space-y-1 mb-8">
       {project.platform && (
         <div>
-          <dt class="font-semibold inline">Platform:</dt>
+          <dt class="font-medium inline">Platform:</dt>
           <dd class="inline ml-1">{project.platform}</dd>
         </div>
       )}
       {project.role && (
         <div>
-          <dt class="font-semibold inline">Role:</dt>
+          <dt class="font-medium inline">Role:</dt>
           <dd class="inline ml-1">{project.role}</dd>
         </div>
       )}
       {project.yearShipped && (
         <div>
-          <dt class="font-semibold inline">Year Shipped:</dt>
+          <dt class="font-medium inline">Year Shipped:</dt>
           <dd class="inline ml-1">{project.yearShipped}</dd>
         </div>
       )}
       {project.teamSetup && (
         <div>
-          <dt class="font-semibold inline">Team Setup:</dt>
+          <dt class="font-medium inline">Team Setup:</dt>
           <dd class="inline ml-1">{project.teamSetup}</dd>
         </div>
       )}
