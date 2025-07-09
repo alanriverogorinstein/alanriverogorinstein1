@@ -1,31 +1,60 @@
 @import "tailwindcss";
 
-body, h1, h2, h3, h4, h5, h6, p, a, li, span {
-  font-family: "indivisible-variable", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  color: #333333;
+@theme {
+  --font-sans: "indivisible-variable", sans-serif;
+  --font-serif: "adobe-kis-variable", serif;
+
+  --text-body: #4d4d4d;
+  --text-heading: #333333;
+
+  --font-size-base: 1rem;
+  --font-size-h2: 1.5rem;
+  --font-size-h3: 1.25rem;
+
+  --line-height-body: 1.6;
+  --line-height-heading: 1.2;
 }
 
-h2, h3 {
-  font-family: "adobe-kis-variable", serif;
-  font-variation-settings: "opsz" 12, "wght" 300;
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-body);
+    color: var(--text-body);
+  }
+
+  h2, h3 {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 18, "wght" 300;
+    color: var(--text-heading);
+    line-height: var(--line-height-heading);
+  }
+
+  .brand {
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 12, "wght" 300;
+  }
 }
 
-.brand {
-  font-family: "adobe-kis-variable", serif;
-  font-variation-settings: "opsz" 12, "wght" 300;
-}
+@layer components {
+  .type-body {
+    @apply text-base font-normal;
+    font-family: var(--font-sans);
+    color: var(--text-body);
+  }
 
-.prose p,
-.content p {
-  color: #4D4D4D;
-}
+  .type-heading-2 {
+    @apply text-2xl font-normal;
+    font-family: var(--font-serif);
+    font-variation-settings: "opsz" 24, "wght" 300;
+    color: var(--text-heading);
+  }
 
-.btn {
-  @apply inline-block px-6 py-3 rounded-full text-sm font-semibold;
-}
+  .btn {
+    @apply inline-block px-6 py-3 rounded-full text-sm font-semibold;
+  }
 
-.btn-primary {
-  @apply bg-black text-white hover:opacity-90 transition;
+  .btn-primary {
+    @apply bg-black text-white hover:opacity-90 transition;
+  }
 }
