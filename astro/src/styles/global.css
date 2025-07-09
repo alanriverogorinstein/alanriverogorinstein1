@@ -1,18 +1,47 @@
 @import "tailwindcss";
 
 @theme {
+  /* Font families */
   --font-sans: "indivisible-variable", sans-serif;
   --font-serif: "adobe-kis-variable", serif;
 
+    /* Font sizes */
+  --font-size-sm: 0.875rem;    /* 14px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-md: 1.125rem;    /* 18px */
+  --font-size-lg: 1.25rem;     /* 20px */
+  --font-size-xl: 1.5rem;      /* 24px */
+  --font-size-2xl: 2rem;       /* 32px */
+  --font-size-3xl: 2.5rem;     /* 40px */
+  --font-size-4xl: 3rem;       /* 48px */
+
+  /* Indivisible (sans) font weights */
+  --font-weight-body: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+
+  /* Kis (serif) font weights */
+  --font-weight-kis-light: 300;
+  --font-weight-kis-regular: 400;
+  --font-weight-kis-bold: 500;
+
+    /* Kis optical size (opsz) */
+  --font-opsz-kis-small: 6;
+  --font-opsz-kis-normal: 12;
+  --font-opsz-kis-large: 24;
+  --font-opsz-kis-display: 36;
+
+    /* Line heights */
+  --line-height-body: 1.6;     /* Loose for paragraphs (16px → ~25.6px) */
+  --line-height-tight: 1.3;    /* For subheadlines or smaller headings */
+  --line-height-heading: 1.2;  /* Default for h1–h3 — crisp, but not cramped */
+  --line-height-display: 1.1;  /* For big, dramatic display headlines */
+
+  --text-heading: #333;
   --text-body: #4d4d4d;
-  --text-heading: #333333;
-
-  --font-size-base: 1rem;
-  --font-size-h2: 1.5rem;
-  --font-size-h3: 1.25rem;
-
-  --line-height-body: 1.6;
-  --line-height-heading: 1.2;
+  --text-muted: #666666;
+  --text-accent: #000000; /* Figure out brand tone */
+  --text-inverse: #fff; /* For dark backgrounds */
 }
 
 @layer base {
@@ -20,41 +49,209 @@
     font-family: var(--font-sans);
     font-size: var(--font-size-base);
     line-height: var(--line-height-body);
+    font-weight: var(--font-weight-body);
     color: var(--text-body);
   }
 
-  h2, h3 {
+  p {
+    line-height: var(--line-height-body);
+    color: var(--text-body);
+  }
+
+  h1 {
     font-family: var(--font-serif);
-    font-variation-settings: "opsz" 18, "wght" 300;
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-kis-light);
+    line-height: var(--line-height-display);
     color: var(--text-heading);
+    font-variation-settings: "opsz" var(--font-opsz-kis-display), "wght" var(--font-weight-kis-light);
+  }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-kis-light);
     line-height: var(--line-height-heading);
+    color: var(--text-heading);
+    font-variation-settings: "opsz" var(--font-opsz-kis-large), "wght" var(--font-weight-kis-light);
+  }
+
+  h3 {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-kis-light);
+    line-height: var(--line-height-heading);
+    color: var(--text-heading);
+    font-variation-settings: "opsz" var(--font-opsz-kis-normal), "wght" var(--font-weight-kis-light);
+  }
+
+  h4 {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-kis-regular);
+    line-height: var(--line-height-tight);
+    color: var(--text-heading);
+    font-variation-settings: "opsz" var(--font-opsz-kis-normal), "wght" var(--font-weight-kis-regular);
   }
 
   .brand {
     font-family: var(--font-serif);
-    font-variation-settings: "opsz" 12, "wght" 300;
+    font-weight: var(--font-weight-kis-light);
+    font-variation-settings: "opsz" var(--font-opsz-kis-small), "wght" var(--font-weight-kis-light);
+    color: var(--text-heading);
+  }
+
+  /* ——— Tailwind Typography (.prose) ——— */
+
+    .prose {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-body);
+    color: var(--text-body);
+    max-width: 65ch;
+  }
+
+  .prose h1 {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-4xl);
+    line-height: var(--line-height-display);
+    font-weight: var(--font-weight-kis-light);
+    color: var(--text-heading);
+    font-variation-settings: "opsz" var(--font-opsz-kis-display), "wght" var(--font-weight-kis-light);
+  }
+
+  .prose h2 {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-2xl);
+    line-height: var(--line-height-heading);
+    font-weight: var(--font-weight-kis-light);
+    color: var(--text-heading);
+    font-variation-settings: "opsz" var(--font-opsz-kis-large), "wght" var(--font-weight-kis-light);
+  }
+
+  .prose h3 {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-xl);
+    line-height: var(--line-height-heading);
+    font-weight: var(--font-weight-kis-light);
+    color: var(--text-heading);
+    font-variation-settings: "opsz" var(--font-opsz-kis-normal), "wght" var(--font-weight-kis-light);
+  }
+
+  .prose h4 {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-tight);
+    font-weight: var(--font-weight-kis-regular);
+    color: var(--text-heading);
+    font-variation-settings: "opsz" var(--font-opsz-kis-normal), "wght" var(--font-weight-kis-regular);
+  }
+
+  .prose p {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-body);
+    color: var(--text-body);
+  }
+
+  .prose strong {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .prose em {
+    font-style: italic;
+  }
+
+  .prose blockquote {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-lg);
+    color: var(--text-muted);
+    font-style: italic;
+    border-left: 2px solid var(--text-muted);
+    padding-left: var(--space-md);
+  }
+
+  .prose figcaption,
+  .prose small {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+  }
+
+  .prose ul {
+  list-style-type: disc;
+  margin-left: 1.5em;
   }
 }
 
 @layer components {
+  /* Body text (paragraphs, default UI text) */
   .type-body {
-    @apply text-base font-normal;
     font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-body);
+    font-weight: var(--font-weight-body);
     color: var(--text-body);
   }
 
-  .type-heading-2 {
-    @apply text-2xl font-normal;
+  /* Display-level headings */
+  .type-heading-1 {
     font-family: var(--font-serif);
-    font-variation-settings: "opsz" 24, "wght" 300;
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-kis-light);
+    line-height: var(--line-height-display);
+    color: var(--text-heading);
+    font-variation-settings: "opsz" var(--font-opsz-kis-display), "wght" var(--font-weight-kis-light);
+  }
+
+  .type-heading-2 {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-kis-light);
+    line-height: var(--line-height-heading);
+    color: var(--text-heading);
+    font-variation-settings: "opsz" var(--font-opsz-kis-large), "wght" var(--font-weight-kis-light);
+  }
+
+  .type-heading-3 {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-kis-light);
+    line-height: var(--line-height-heading);
+    color: var(--text-heading);
+    font-variation-settings: "opsz" var(--font-opsz-kis-normal), "wght" var(--font-weight-kis-light);
+  }
+
+  .type-heading-4 {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-kis-regular);
+    line-height: var(--line-height-tight);
+    color: var(--text-heading);
+    font-variation-settings: "opsz" var(--font-opsz-kis-normal), "wght" var(--font-weight-kis-regular);
+  }
+
+  /* Optional: lead paragraph for intro blurbs */
+  .type-lead {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-body);
+    font-weight: var(--font-weight-body);
+    color: var(--text-body);
+  }
+
+  /* Signature branding */
+  .brand {
+    font-family: var(--font-serif);
+    font-weight: var(--font-weight-kis-light);
+    font-variation-settings: "opsz" var(--font-opsz-kis-small), "wght" var(--font-weight-kis-light);
     color: var(--text-heading);
   }
 
-  .btn {
-    @apply inline-block px-6 py-3 rounded-full text-sm font-semibold;
-  }
-
-  .btn-primary {
-    @apply bg-black text-white hover:opacity-90 transition;
+  /* Muted text for captions, timestamps, etc. */
+  .type-muted {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
   }
 }
+
