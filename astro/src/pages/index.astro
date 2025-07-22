@@ -45,6 +45,71 @@ const dribbbleData = await dribbbleRes.json();
 const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
 
 ---
+
+<SiteShell title="Alan Rivero Gorinstein • Senior UX Designer">
+  <main class="px-8 py-16 max-w-screen-2xl mx-auto">
+    <h2 class="text-3xl md:text-5xl font-serif font-light tracking-tight mb-8">
+      Shipped products
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+      {corporateProjects.map((project: any) => (
+        <a
+          href={`/project/${project.slug.current}`}
+          class="group block hover:opacity-90 transition"
+        >
+          <div class="flex flex-col">
+            {project.image && (
+              <img
+                src={urlForImage(project.image)}
+                alt={project.title}
+                class="w-full h-72 object-cover mb-4 group-hover:scale-[1.01] transition-transform duration-200"
+              />
+            )}
+            <h3 class="text-lg md:text-xl font-serif font-light mb-1 group-hover:underline">
+              {project.title}
+            </h3>
+            <p class="text-sm md:text-base text-[#4D4D4D]">
+              {project.description}
+            </p>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="text-3xl md:text-5xl font-serif font-light tracking-tight mb-8">
+      Concepts and one-offs
+    </h2>
+
+    {Array.isArray(dribbbleShots) && dribbbleShots.length > 0 && (
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {dribbbleShots.map((shot: any) => (
+          <a
+            href={shot.html_url}
+            class="group block hover:opacity-90 transition"
+            target="_blank"
+            key={shot.id}
+          >
+            <img
+              src={shot.images.normal}
+              alt={shot.title}
+              class="w-full h-72 object-cover mb-3 group-hover:scale-[1.01] transition-transform duration-200"
+            />
+            <h3 class="text-lg md:text-xl font-serif font-light group-hover:underline">
+              {shot.title}
+            </h3>
+          </a>
+        ))}
+      </div>
+    )}
+  </main>
+  <Footer />
+</SiteShell>
+
+
+
+
+<!-- Previous
 <SiteShell title="Alan Rivero Gorinstein • Senior UX Designer">
   <main class="px-6 py-12 max-w-screen-2xl mx-auto">
     <h2 class="type-heading-2 mb-4">Shipped products</h2>
@@ -82,3 +147,4 @@ const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
   </main>
   <Footer />
 </SiteShell>
+-->
