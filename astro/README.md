@@ -51,3 +51,4 @@ Custom SiteShell layout with global font and navigation
 Tailwind utility styling with custom serif + sans font stack
 Clean responsive design across breakpoints
 Tags for safe fallback and versioning
+```

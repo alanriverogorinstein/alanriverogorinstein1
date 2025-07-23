@@ -1,4 +1,4 @@
-import { defineType } from 'sanity'
+import {defineType} from 'sanity'
 
 export default defineType({
   name: 'project',
@@ -43,7 +43,7 @@ export default defineType({
       name: 'impact',
       title: 'The Impact',
       type: 'array',
-      of: [{ type: 'string' }],
+      of: [{type: 'string'}],
     },
     {
       name: 'platform',
@@ -77,11 +77,7 @@ export default defineType({
       name: 'body',
       title: 'Case Study Body',
       type: 'array',
-      of: [
-        { type: 'block' },
-        { type: 'image', options: { hotspot: true } },
-        { type: 'videoEmbed' },
-      ],
+      of: [{type: 'block'}, {type: 'image', options: {hotspot: true}}, {type: 'videoEmbed'}],
     },
   ],
 })

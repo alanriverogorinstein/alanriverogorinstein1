@@ -1,8 +1,8 @@
 ---
+// Imports
 import SiteShell from '@/layouts/SiteShell.astro';
-import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import "../styles/global.css";
+import '../styles/global.css';
 import imageUrlBuilder from '@sanity/image-url';
 
 // Sanity config
@@ -11,8 +11,8 @@ const dataset = 'production';
 
 const builder = imageUrlBuilder({ projectId, dataset });
 
-function urlForImage(source: any): string {
-  return builder.image(source).width(600).url();
+function urlForImage(source: any) {
+  return builder.image(source);
 }
 
 // Fetch projects from Sanity
@@ -29,148 +29,116 @@ const url = `https://${projectId}.api.sanity.io/v2021-10-21/data/query/${dataset
 const res = await fetch(url);
 const { result: projects } = await res.json();
 
-const corporateProjects = projects.filter((p: any) => p.category === "corporate");
-const personalProjects = projects.filter((p: any) => p.category === "personal");
+const corporateProjects = projects.filter(
+  (p: any) => p.category === 'corporate',
+);
+const personalProjects = projects.filter((p: any) => p.category === 'personal');
 
 // All code for Dribbble fetch
 const token = import.meta.env.DRIBBBLE_TOKEN as string;
 
-const dribbbleRes = await fetch("https://api.dribbble.com/v2/user/shots", {
+const dribbbleRes = await fetch('https://api.dribbble.com/v2/user/shots', {
   headers: {
-    Authorization: `Bearer ${token}`
-  }
+    Authorization: `Bearer ${token}`,
+  },
 });
 
 const dribbbleData = await dribbbleRes.json();
 const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
-
 ---
 
 <SiteShell title="Alan Rivero Gorinstein • Senior UX Designer">
   <main class="px-8 py-16 max-w-screen-2xl mx-auto">
-<h2 class="text-3xl md:text-5xl font-serif font-light tracking-tight mb-8">
-  Shipped products
-</h2>
+    <h2 class="text-3xl md:text-5xl font-serif font-light tracking-tight mb-8">
+      Shipped products
+    </h2>
 
-{corporateProjects.length > 0 && (
-  <>
-    <!-- Hero Project -->
-    <a
-      href={`/project/${corporateProjects[0].slug.current}`}
-      class="group block hover:opacity-90 transition mb-12"
-    >
-      <div class="flex flex-col">
-        {corporateProjects[0].image && (
-          <img
-            src={urlForImage(corporateProjects[0].image)}
-            alt={corporateProjects[0].title}
-              class="w-full aspect-[3/2] md:aspect-[16/9] object-cover mb-6 group-hover:scale-[1.01] transition-transform duration-200"/>
-        )}
-        <h3 class="text-2xl md:text-3xl font-serif font-light mb-2 group-hover:underline">
-          {corporateProjects[0].title}
-        </h3>
-        <p class="text-base md:text-lg text-[#4D4D4D]">
-          {corporateProjects[0].description}
-        </p>
-      </div>
-    </a>
+    {
+      corporateProjects.length > 0 && (
+        <>
+          {/*Hero Project */}
+          <a
+            href={`/project/${corporateProjects[0].slug.current}`}
+            class="group block hover:opacity-90 transition mb-12"
+          >
+            <div class="flex flex-col">
+              {corporateProjects[0].image && (
+                <img
+                  src={urlForImage(corporateProjects[0].image)
+                    .width(2880)
+                    .quality(100)
+                    .auto('format')
+                    .url()}
+                  alt={corporateProjects[0].title}
+                  class="w-full aspect-[3/2] md:aspect-[16/9] object-cover mb-6 group-hover:scale-[1.01] transition-transform duration-200"
+                />
+              )}
+              <h3 class="text-2xl md:text-3xl font-serif font-light mb-2 group-hover:underline">
+                {corporateProjects[0].title}
+              </h3>
+              <p class="text-base md:text-lg text-[#4D4D4D]">
+                {corporateProjects[0].description}
+              </p>
+            </div>
+          </a>
 
-    <!-- Subgrid for remaining projects -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-      {corporateProjects.slice(1).map((project: any) => (
-        <a
-          href={`/project/${project.slug.current}`}
-          class="group block hover:opacity-90 transition"
-        >
-          <div class="flex flex-col">
-            {project.image && (
-              <img
-                src={urlForImage(project.image)}
-                alt={project.title}
-                class="w-full h-72 object-cover mb-4 group-hover:scale-[1.01] transition-transform duration-200"
-              />
-            )}
-            <h3 class="text-lg md:text-xl font-serif font-light mb-1 group-hover:underline">
-              {project.title}
-            </h3>
-            <p class="text-sm md:text-base text-[#4D4D4D]">
-              {project.description}
-            </p>
+          {/*Subgrid for remaining projects */}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            {corporateProjects.slice(1).map((project: any) => (
+              <a
+                href={`/project/${project.slug.current}`}
+                class="group block hover:opacity-90 transition"
+              >
+                <div class="flex flex-col">
+                  {project.image && (
+                    <img
+                      src={urlForImage(project.image)}
+                      alt={project.title}
+                      class="w-full h-72 object-cover mb-4 group-hover:scale-[1.01] transition-transform duration-200"
+                    />
+                  )}
+                  <h3 class="text-lg md:text-xl font-serif font-light mb-1 group-hover:underline">
+                    {project.title}
+                  </h3>
+                  <p class="text-sm md:text-base text-[#4D4D4D]">
+                    {project.description}
+                  </p>
+                </div>
+              </a>
+            ))}
           </div>
-        </a>
-      ))}
-    </div>
-  </>
-)}
+        </>
+      )
+    }
 
     <h2 class="text-3xl md:text-5xl font-serif font-light tracking-tight mb-8">
       Concepts and one-offs
     </h2>
 
-    {Array.isArray(dribbbleShots) && dribbbleShots.length > 0 && (
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {dribbbleShots.map((shot: any) => (
-          <a
-            href={shot.html_url}
-            class="group block hover:opacity-90 transition"
-            target="_blank"
-            key={shot.id}
-          >
-            <img
-              src={shot.images.normal}
-              alt={shot.title}
-              class="w-full h-72 object-cover mb-3 group-hover:scale-[1.01] transition-transform duration-200"
-            />
-            <h3 class="text-lg md:text-xl font-serif font-light group-hover:underline">
-              {shot.title}
-            </h3>
-          </a>
-        ))}
-      </div>
-    )}
-  </main>
-  <Footer />
-</SiteShell>
-
-
-
-
-<!-- Previous
-<SiteShell title="Alan Rivero Gorinstein • Senior UX Designer">
-  <main class="px-6 py-12 max-w-screen-2xl mx-auto">
-    <h2 class="type-heading-2 mb-4">Shipped products</h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-      {corporateProjects.map((project: any) => (
-        <a href={`/project/${project.slug.current}`} class="block hover:opacity-90 transition">
-          <div class="p-0 h-[500px] flex flex-col">
-            {project.image && (
+    {
+      Array.isArray(dribbbleShots) && dribbbleShots.length > 0 && (
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {dribbbleShots.map((shot: any) => (
+            <a
+              href={shot.html_url}
+              class="group block hover:opacity-90 transition"
+              target="_blank"
+              key={shot.id}
+            >
               <img
-                src={urlForImage(project.image)}
-                alt={project.title}
-                class="w-full h-90 object-cover mb-3"
+                src={shot.images.normal}
+                alt={shot.title}
+                class="w-full h-72 object-cover mb-3 group-hover:scale-[1.01] transition-transform duration-200"
               />
-            )}
-            <h3 class="type-heading-3 mb-1">{project.title}</h3>
-            <p class="type-muted">{project.description}</p>
-          </div>
-        </a>
-      ))}
-    </div>
-
-    <h2 class="type-heading-2 mb-4">Concepts and one-offs</h2>
-
-    {Array.isArray(dribbbleShots) && dribbbleShots.length > 0 && (
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {dribbbleShots.map((shot: any) => (
-          <a href={shot.html_url} class="block p-0 hover:opacity-90 transition" target="_blank" key={shot.id}>
-            <img src={shot.images.normal} alt={shot.title} class="w-full h-80 object-cover mb-2" />
-            <h3 class="type-heading-3">{shot.title}</h3>
-          </a>
-        ))}
-      </div>
-    )}
+              <h3 class="text-lg md:text-xl font-serif font-light group-hover:underline">
+                {shot.title}
+              </h3>
+            </a>
+          ))}
+        </div>
+      )
+    }
   </main>
+
   <Footer />
 </SiteShell>
--->

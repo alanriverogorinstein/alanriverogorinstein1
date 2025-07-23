@@ -2,15 +2,15 @@
 
 // @ts-check for VS Code
 import { defineConfig } from 'astro/config';
-import tailwindcss from "@tailwindcss/vite";
-import sanity from "@sanity/astro";
+import tailwindcss from '@tailwindcss/vite';
+import sanity from '@sanity/astro';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 // https://astro.build/config
 export default defineConfig({
- vite: {
+  vite: {
     plugins: [tailwindcss()],
     resolve: {
       alias: {
@@ -21,8 +21,8 @@ export default defineConfig({
 
   integrations: [
     sanity({
-      projectId: "tvtqrltk",
-      dataset: "production",
+      projectId: 'tvtqrltk',
+      dataset: 'production',
       useCdn: false, // for static builds
     }),
   ],
