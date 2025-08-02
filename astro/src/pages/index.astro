@@ -49,14 +49,14 @@ const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
 
 <SiteShell title="Alan Rivero Gorinstein • Senior UX Designer">
   <main class="px-8 py-16 max-w-screen-2xl mx-auto">
-    <h2 class="text-3xl md:text-5xl font-serif font-light tracking-tight mb-8">
+    <h2 class="text-3xl md:text-5xl font-sans tracking-tight mb-8">
       Shipped products
     </h2>
 
     {
       corporateProjects.length > 0 && (
         <>
-          {/*Hero Project */}
+          {/* Hero Project */}
           <a
             href={`/project/${corporateProjects[0].slug.current}`}
             class="group block hover:opacity-90 transition mb-12"
@@ -73,7 +73,7 @@ const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
                   class="w-full aspect-[3/2] md:aspect-[16/9] object-cover mb-6 group-hover:scale-[1.01] transition-transform duration-200"
                 />
               )}
-              <h3 class="text-2xl md:text-3xl font-serif font-light mb-2 group-hover:underline">
+              <h3 class="text-2xl md:text-3xl font-sans mb-2 group-hover:underline">
                 {corporateProjects[0].title}
               </h3>
               <p class="text-base md:text-lg text-[#4D4D4D]">
@@ -82,7 +82,7 @@ const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
             </div>
           </a>
 
-          {/*Subgrid for remaining projects */}
+          {/* Subgrid for remaining projects */}
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             {corporateProjects.slice(1).map((project: any) => (
               <a
@@ -97,7 +97,7 @@ const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
                       class="w-full h-72 object-cover mb-4 group-hover:scale-[1.01] transition-transform duration-200"
                     />
                   )}
-                  <h3 class="text-lg md:text-xl font-serif font-light mb-1 group-hover:underline">
+                  <h3 class="text-lg md:text-xl font-sans mb-1 group-hover:underline">
                     {project.title}
                   </h3>
                   <p class="text-sm md:text-base text-[#4D4D4D]">
@@ -111,7 +111,7 @@ const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
       )
     }
 
-    <h2 class="text-3xl md:text-5xl font-serif font-light tracking-tight mb-8">
+    <h2 class="text-3xl md:text-5xl font-sans tracking-tight mb-8">
       Concepts and one-offs
     </h2>
 
@@ -130,7 +130,7 @@ const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
                 alt={shot.title}
                 class="w-full h-72 object-cover mb-3 group-hover:scale-[1.01] transition-transform duration-200"
               />
-              <h3 class="text-lg md:text-xl font-serif font-light group-hover:underline">
+              <h3 class="text-lg md:text-xl font-sans group-hover:underline">
                 {shot.title}
               </h3>
             </a>
