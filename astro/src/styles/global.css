@@ -124,37 +124,55 @@
 }
 
 @layer components {
-  .type-body {
+  /* 🔹 Core Type Scale (Beausite Classic Regular only) */
+  .type-display {
     font-family: var(--font-sans);
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-body);
+    font-size: 3.25rem;
+    line-height: 1.1;
+    font-weight: 400;
+    color: var(--text-heading);
+  }
+
+  .type-h1 {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    font-weight: 400;
+  }
+  .type-h2 {
+    font-size: 1.75rem;
+    line-height: 1.3;
+    font-weight: 400;
+  }
+  .type-h3 {
+    font-size: 1.375rem;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  .type-h4 {
+    font-size: 1.125rem;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .type-body {
+    font-size: 1rem;
+    line-height: 1.6;
     font-weight: 400;
     color: var(--text-body);
   }
 
-  .type-heading-1 {
-    font-family: var(--font-sans);
-    font-size: var(--font-size-4xl);
-    line-height: var(--line-height-display);
-    font-weight: 400;
+  .type-meta {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--text-muted);
   }
-  .type-heading-2 {
-    font-family: var(--font-sans);
-    font-size: var(--font-size-2xl);
-    line-height: var(--line-height-heading);
-    font-weight: 400;
-  }
-  .type-heading-3 {
-    font-family: var(--font-sans);
-    font-size: var(--font-size-xl);
-    line-height: var(--line-height-heading);
-    font-weight: 400;
-  }
-  .type-heading-4 {
-    font-family: var(--font-sans);
-    font-size: var(--font-size-lg);
-    line-height: var(--line-height-tight);
-    font-weight: 400;
+
+  .type-meta-upper {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
   }
 
   .type-lead {
@@ -176,6 +194,7 @@
     font-size: var(--font-size-sm);
     color: var(--text-muted);
   }
+
   .type-accent {
     color: var(--text-accent);
   }
