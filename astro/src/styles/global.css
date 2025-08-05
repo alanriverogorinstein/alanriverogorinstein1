@@ -10,8 +10,19 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Make Way';
+  src:
+    url('/fonts/makeway/MakeWayWeb-Medium.woff2') format('woff2'),
+    url('/fonts/makeway/MakeWayWeb-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-sans: 'Beausite Classic', sans-serif;
+  --font-serif-display: 'Make Way', serif;
 }
 
 @layer base {
@@ -124,6 +135,40 @@
 }
 
 @layer components {
+  .brand-masthead {
+    font-family: var(--font-serif-display);
+    font-size: 1.5rem;
+    line-height: 2;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--text-heading);
+  }
+
+  .type-display-serif {
+    font-family: var(--font-serif-display);
+    font-size: 3.25rem;
+    line-height: 1.1;
+    font-weight: 500;
+    color: var(--text-heading);
+  }
+
+  .type-h1-serif {
+    font-family: var(--font-serif-display);
+    font-size: 2.25rem;
+    line-height: 1.2;
+    font-weight: 500;
+    color: var(--text-heading);
+  }
+
+  .type-h2-serif {
+    font-family: var(--font-serif-display);
+    font-size: var(--font-size-2xl);
+    line-height: var(--line-height-heading);
+    font-weight: 500;
+    color: var(--text-heading);
+  }
+
   /* 🔹 Core Type Scale (Beausite Classic Regular only) */
   .type-display {
     font-family: var(--font-sans);
