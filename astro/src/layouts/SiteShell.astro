@@ -2,21 +2,25 @@
 import Navbar from '@/components/Navbar.astro';
 import '@/styles/global.css';
 
-// Title default (can be overridden from index/about/slug)
-const { title = 'Alan Rivero Gorinstein • Senior UX Designer' } = Astro.props;
+export interface Props {
+  pageTitle?: string;
+  showNavbar?: boolean;
+}
+
+const { pageTitle = '' } = Astro.props;
+const showNavbar = Astro.props.showNavbar ?? true;
 ---
 
 <html lang="en">
   <head>
-    <title>{title}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
 
-    <!-- Optional: add SEO description or favicon here -->
+    <!-- Optional: add SEO description, favicon, fonts, etc -->
   </head>
-
   <body>
-    <Navbar />
+    {showNavbar && <Navbar />}
     <main>
       <slot />
     </main>

@@ -1,21 +1,20 @@
 ---
-// Imports
+/* Imports */
 import SiteShell from '@/layouts/SiteShell.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 import imageUrlBuilder from '@sanity/image-url';
 
-// Sanity config
+/* Sanity config */
 const projectId = 'tvtqrltk';
 const dataset = 'production';
 
 const builder = imageUrlBuilder({ projectId, dataset });
-
 function urlForImage(source: any) {
   return builder.image(source);
 }
 
-// Fetch projects from Sanity
+/* Fetch projects from Sanity */
 const query = `*[_type == "project"] | order(title asc){
   _id,
   title,
@@ -24,7 +23,6 @@ const query = `*[_type == "project"] | order(title asc){
   image,
   slug
 }`;
-
 const url = `https://${projectId}.api.sanity.io/v2021-10-21/data/query/${dataset}?query=${encodeURIComponent(query)}`;
 const res = await fetch(url);
 const { result: projects } = await res.json();
@@ -34,23 +32,83 @@ const corporateProjects = projects.filter(
 );
 const personalProjects = projects.filter((p: any) => p.category === 'personal');
 
-// All code for Dribbble fetch
+/* Dribbble fetch */
 const token = import.meta.env.DRIBBBLE_TOKEN as string;
-
 const dribbbleRes = await fetch('https://api.dribbble.com/v2/user/shots', {
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
+  headers: { Authorization: `Bearer ${token}` },
 });
-
 const dribbbleData = await dribbbleRes.json();
 const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
+
+/* Hero headline for a11y/SEO (visual is in the video) */
+const headlineAlt =
+  'Screens with a pulse — Alan Rivero Gorinstein · UX Designer';
 ---
 
-<SiteShell title="Alan Rivero Gorinstein • Senior UX Designer">
+<!-- HERO stays outside SiteShell (as you set it) -->
+<section
+  id="hero"
+  class="relative flex items-center justify-center min-h-[72vh] bg-white"
+  aria-label="Intro hero"
+>
+  <div class="w-full max-w-screen-2xl mx-auto">
+    <video
+      class="w-full h-auto object-contain pointer-events-none"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      poster="/media/hero-poster.jpg"
+      aria-hidden="true"
+    >
+      <source src="/media/hero.webm" type="video/webm" />
+      <source src="/media/hero.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <h1 class="sr-only">{headlineAlt}</h1>
+</section>
+
+<SiteShell
+  pageTitle="Alan Rivero Gorinstein • Senior UX Designer"
+  showNavbar={false}
+>
+  <!-- NEW: simple, centered nav that flows (not fixed) -->
+  <nav id="simple-nav" class="px-8 py-6">
+    <div class="flex justify-center items-center gap-6">
+      <a
+        href="/about"
+        class="type-accent text-sm md:text-base font-medium hover:opacity-80 transition"
+      >
+        About
+      </a>
+      <a
+        href="https://www.linkedin.com/in/alanriverogorinstein/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block hover:opacity-80 transition"
+        aria-label="LinkedIn"
+        title="LinkedIn"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6"
+          fill="#2C65BC"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.56h.06c.53-1 1.82-2.06 3.75-2.06 4.01 0 4.75 2.64 4.75 6.08V24h-4v-7.66c0-1.83-.03-4.19-2.55-4.19-2.55 0-2.94 1.99-2.94 4.05V24h-4V8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main content -->
   <main class="px-8 py-16 max-w-screen-2xl mx-auto">
     <h2 class="text-3xl md:text-5xl font-sans tracking-tight mb-8">
-      Shipped products
+      Case studies
     </h2>
 
     {
@@ -142,3 +200,20 @@ const dribbbleShots = Array.isArray(dribbbleData) ? dribbbleData : [];
 
   <Footer />
 </SiteShell>
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    #hero video {
+      display: none;
+    }
+    #hero {
+      background-image: url('/media/hero-poster.jpg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+  #hero {
+    contain: layout style;
+  }
+</style>
