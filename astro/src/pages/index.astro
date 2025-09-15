@@ -45,29 +45,56 @@ const headlineAlt =
   'Screens with a pulse — Alan Rivero Gorinstein · UX Designer';
 ---
 
-<!-- HERO stays outside SiteShell (as you set it) -->
 <section
   id="hero"
-  class="relative flex items-center justify-center min-h-[72vh] bg-white"
+  class="relative flex items-center justify-center min-h-[82vh] bg-white"
   aria-label="Intro hero"
 >
-  <div class="w-full max-w-screen-2xl mx-auto">
-    <video
-      class="w-full h-auto object-contain pointer-events-none"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="auto"
-      poster="/media/hero-poster.jpg"
-      aria-hidden="true"
+  <div
+    class="w-full max-w-screen-xl mx-auto px-8 py-24 md:py-32 flex flex-col items-center"
+  >
+    <!-- Logo -->
+    <div class="mb-12 md:mb-14">
+      <img
+        src="/brand/handkerchief_logo.svg"
+        alt="Folded handkerchief mark with world map"
+        class="w-28 md:w-36 lg:w-44 aspect-square"
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+
+    <!-- Headline -->
+    <h1
+      class="type-display-serif text-left leading-[1.05] text-6xl md:text-8xl lg:text-9xl mb-7 max-w-4xl"
     >
-      <source src="/media/hero.webm" type="video/webm" />
-      <source src="/media/hero.mp4" type="video/mp4" />
-    </video>
+      The World is a Handkerchief.
+    </h1>
+
+    <!-- Body + Signature grouped in one box -->
+    <div class="text-left max-w-3xl">
+      <p
+        class="type-body text-xl md:text-2xl leading-relaxed mb-8 text-neutral-800"
+      >
+        It’s small, familiar, and full of charm. You’ve felt it in an unexpected
+        connection, a coincidence, a chance encounter. In these times, rich with
+        opportunity and fraught with fear, I believe design has a
+        responsibility: to reveal this truth in every interaction with people
+        and things.
+      </p>
+
+      <p class="type-body text-lg md:text-xl text-neutral-900">
+        Alan Rivero Gorinstein · UX Designer
+      </p>
+    </div>
   </div>
-  <h1 class="sr-only">{headlineAlt}</h1>
 </section>
+
+<style>
+  #hero {
+    contain: layout style;
+  }
+</style>
 
 <SiteShell
   pageTitle="Alan Rivero Gorinstein • Senior UX Designer"
