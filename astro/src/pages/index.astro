@@ -56,9 +56,9 @@ const headlineAlt =
     <!-- Logo -->
     <div class="mb-12 md:mb-14">
       <img
-        src="/brand/handkerchief_logo.svg"
-        alt="Folded handkerchief mark with world map"
-        class="w-28 md:w-36 lg:w-44 aspect-square"
+        src="/brand/upwards_spiral_logo.svg"
+        alt="Upwards spiral logo"
+        class="aspect-square h-auto w-[clamp(7rem,8vw,11rem)]"
         loading="eager"
         decoding="async"
       />
@@ -66,30 +66,42 @@ const headlineAlt =
 
     <!-- Headline (keeps presence) -->
     <h1
-      class="type-display-serif leading-[1.05] text-6xl md:text-8xl lg:text-9xl mb-7 max-w-4xl text-center mx-auto"
+      class="type-display-serif leading-[1.05] mb-7 text-center
+         text-[clamp(2rem,6vw,7rem)]"
     >
-      There is a better way to do everything
+      <span class="block whitespace-nowrap">There is a better way</span>
+      <span class="block whitespace-nowrap">to do everything</span>
     </h1>
 
     <!-- Body + Signature as a narrow manifesto column -->
-    <div class="w-full mx-auto text-left max-w-[60ch] md:max-w-[62ch]">
+    <div
+      class="w-full mx-auto text-left
+         max-w-[60ch] md:max-w-[70ch] lg:max-w-[80ch] xl:max-w-[90ch] 2xl:max-w-[100ch]"
+    >
       <p
         class="type-body text-xl md:text-2xl leading-relaxed mb-8 text-neutral-800"
       >
-        Design's most important responsibility is to emphatically remind us of
-        these facts: awareness and intention
-        <span
-          class="bg-gradient-to-r from-current to-current bg-[length:100%_1px] bg-no-repeat bg-bottom pb-[2px]"
-        >
-          can
-        </span>
-        be applied. Things
-        <span
-          class="bg-gradient-to-r from-current to-current bg-[length:100%_1px] bg-no-repeat bg-bottom pb-[2px]"
-        >
-          can
-        </span>
-        get better.
+        I believe design is about possibility. Every single thing we take for
+        granted—the built environment, interactions with software, daily
+        rituals, feelings—can be re-seen and nudged into something better. Not
+        dramatically reinvented, but tuned with awareness and intention.
+      </p>
+
+      <p
+        class="type-body text-xl md:text-2xl leading-relaxed mb-8 text-neutral-800"
+      >
+        Everything can be lifted. There is always slack in the system: a better
+        turn of the screw, a smoother path, a kinder detail, a clearer word. It
+        is far from chasing flawless outcomes and more about cultivating the
+        habit of not settling. Improvement is always on the table if we are
+        willing to notice and try.
+      </p>
+
+      <p
+        class="type-body text-xl md:text-2xl leading-relaxed mb-8 text-neutral-800"
+      >
+        It is close to encouragement and far from arrogance. Our work is to keep
+        reminding ourselves, and everyone, that change is possible.
       </p>
     </div>
 
